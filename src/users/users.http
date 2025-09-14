@@ -1,0 +1,68 @@
+@baseUrl = http://localhost:4001/api
+
+### Get All Users
+GET {{baseUrl}}/users
+Content-Type: application/json
+
+### Get User by ID
+GET {{baseUrl}}/users/1
+Content-Type: application/json
+
+### Create New User
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john.doe@demo.com",
+    "password": "securePassword123",
+    "role": "USER"
+}
+
+### Create Admin User
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "name": "Admin User",
+    "email": "admin@example.com",
+    "password": "adminPassword123",
+    "role": "ADMIN"
+}
+
+### Update User
+PUT {{baseUrl}}/users/1
+Content-Type: application/json
+
+{
+    "name": "John Doe Updated",
+    "email": "john.updated@example.com",
+    "role": "USER"
+}
+
+### Delete User
+DELETE {{baseUrl}}/users/1
+Content-Type: application/json
+
+### Example Users for Testing
+# You can use these example users in your requests:
+# {
+#     "name": "Alice Smith",
+#     "email": "alice.smith@example.com",
+#     "password": "alicePass123",
+#     "role": "USER"
+# }
+# 
+# {
+#     "name": "Bob Johnson",
+#     "email": "bob.johnson@example.com",
+#     "password": "bobPass123",
+#     "role": "USER"
+# }
+# 
+# {
+#     "name": "Carol Wilson",
+#     "email": "carol.wilson@example.com",
+#     "password": "carolPass123",
+#     "role": "ADMIN"
+# }

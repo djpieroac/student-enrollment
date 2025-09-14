@@ -1,0 +1,30 @@
+@baseUrl = http://localhost:4001/api
+
+### Login
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "john.doe@example.com",
+    "password": "securePassword123"
+}
+
+### Refresh Token
+POST {{baseUrl}}/auth/refresh
+Content-Type: application/json
+
+### Logout
+POST {{baseUrl}}/auth/logout
+Content-Type: application/json
+
+### Signup
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test@example.com",
+  "password": "test123",
+  "role": "user"
+}
