@@ -1,6 +1,6 @@
-# Backend Boilerplate
+# Student Enrollment System
 
-A robust Node.js backend boilerplate with TypeScript, Express, Prisma, and JWT authentication.
+A modern student enrollment system built with Node.js and TypeScript, providing secure authentication and efficient student management.
 
 ## Tech Stack
 
@@ -10,24 +10,16 @@ A robust Node.js backend boilerplate with TypeScript, Express, Prisma, and JWT a
 - **Database**: MySQL with Prisma ORM
 - **Authentication**: JWT (JSON Web Tokens)
 - **Container**: Docker for MySQL
-- **Code Quality**: 
-  - Biome for formatting and linting
-  - TypeScript strict mode
-- **Development**: 
-  - ts-node-dev for hot reloading
-  - Environment variables support
 
 ## Features
 
-- 🔐 JWT Authentication with access and refresh tokens
+- 🎓 Complete student enrollment management
+- 🔐 Secure JWT Authentication
 - 🗄️ MySQL database with Prisma ORM
-- 🐳 Docker configuration for MySQL
-- 🔍 Type safety with TypeScript
-- ⚡ Hot reloading for development
-- 🚦 Error handling middleware
-- 🔒 Cookie-based token storage
-- 👥 User management system
-- 🔄 Route protection middleware
+- 🐳 Docker configuration for easy setup
+- 🔒 Cookie-based secure sessions
+- 👥 User and student management
+- ⚡ Fast and efficient API responses
 
 ## Getting Started
 
@@ -35,68 +27,45 @@ A robust Node.js backend boilerplate with TypeScript, Express, Prisma, and JWT a
 
 - Node.js (v16 or higher)
 - Docker and Docker Compose
-- MySQL (or Docker for MySQL)
 - npm or yarn
 
-### Installation
+### Environment Setup
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd boilerplate_backend
-   ```
+Configure your environment variables in `.env`:
+```env
+PORT=4001
+APP_FRONTEND_URL=http://localhost:3000
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+# JWT Configuration
+JWT_SECRET=your_jwt_secret_key_here
+JWT_SECRET_REFRESH=your_jwt_refresh_secret_key_here
 
-3. Create environment file:
-   ```bash
-   cp .env.example .env
-   ```
+# MySQL Configuration
+MYSQL_ROOT_PASSWORD=root
+MYSQL_DATABASE=enrollment_db
+MYSQL_USER=admin
+MYSQL_PASSWORD=admin123
+MYSQL_PORT=3306
+```
 
-4. Configure your environment variables in `.env`:
-   ```env
-   PORT=4001
-   APP_FRONTEND_URL=http://localhost:3000
-   
-   # JWT Configuration
-   JWT_SECRET=your_jwt_secret_key_here
-   JWT_SECRET_REFRESH=your_jwt_refresh_secret_key_here
-   
-   # MySQL Configuration
-   MYSQL_ROOT_PASSWORD=root
-   MYSQL_DATABASE=boilerplate_db
-   MYSQL_USER=admin
-   MYSQL_PASSWORD=admin123
-   MYSQL_PORT=3306
-   ```
+### Quick Start Commands
 
-5. Start MySQL with Docker:
-   ```bash
-   npm run docker:up
-   ```
+1. Start MySQL container:
+```bash
+npm run docker:up
+```
 
-6. Run database migrations:
-   ```bash
-   npm run migrate
-   ```
+2. Setup database:
+```bash
+npm run migrate   # Run migrations
+npm run generate # Generate Prisma Client
+npm run seed     # Seed initial data
+```
 
-7. Generate Prisma Client:
-   ```bash
-   npm run generate
-   ```
-
-8. Seed the database:
-   ```bash
-   npm run seed
-   ```
-
-9. Start the development server:
-   ```bash
-   npm run dev
-   ```
+3. Start development server:
+```bash
+npm run dev
+```
 
 The server will start at `http://localhost:4001`.
 
