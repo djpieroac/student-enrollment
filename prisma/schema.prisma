@@ -8,17 +8,169 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id             Int      @id @default(autoincrement()) @map("id")
-  name           String   @map("name")
-  email          String   @unique @map("email")
-  password       String   @map("password")
-  photo          String?  @map("photo")
-  role           String   @map("role")
-  validateEmail  Boolean  @default(false) @map("validate_email")
-  deleted        Boolean  @default(false) @map("deleted")
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
+// model User {
+// id             Int      @id @default(autoincrement()) @map("id")
+// name           String   @map("name")
+// email          String   @unique @map("email")
+// password       String   @map("password")
+// photo          String?  @map("photo")
+// role           String   @map("role")
+// validateEmail  Boolean  @default(false) @map("validate_email")
+// deleted        Boolean  @default(false) @map("deleted")
+// createdAt      DateTime @default(now()) @map("created_at")
+// updatedAt      DateTime @updatedAt @map("updated_at")
 
-  @@map("users")
+// @@map("users")
+// }
+
+model User {
+  id_users     Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  password     String
+  role         String
+
+  validate_email Boolean  @default(false)
+  deleted_at    Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  
+  Profile      Profile[]
+}
+
+model Profile {
+  id_profiles       Int                @id @default(autoincrement())
+  DNI              String              @unique
+  name             String
+  lastname         String        
+  date_birthday    DateTime
+  national         String
+  phone            String
+  addres           String
+  sex              String
+  status           String
+
+  deleted_at    Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  id_user        Int
+  user            User              @relation(fields: [id_user], references: [id_users], onDelete: NoAction, onUpdate: NoAction)
+  teacher       teacher[]
+  legal_representative LegalRepresentative[]
+  student       Student[]
+}
+
+
+model teacher {
+  id_teachers Int      @id @default(autoincrement())
+  academic_degree String
+  salary         Float
+
+  deleted_at    Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  id_profile  Int
+  profile     Profile @relation(fields: [id_profile], references: [id_profiles], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model LegalRepresentative {
+  id_legal_representatives  Int      @id @default(autoincrement())
+  family_relationship       String
+
+  deleted_at    Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  id_profile  Int
+  profile     Profile @relation(fields: [id_profile], references: [id_profiles], onDelete: NoAction, onUpdate: NoAction)
+  enrollments Enrollment[]
+}
+
+model Student {
+  id_students    Int      @id @default(autoincrement())
+  emergency_contact String
+
+  deleted_at    Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  id_profile     Int
+  profile        Profile @relation(fields: [id_profile], references: [id_profiles], onDelete: NoAction, onUpdate: NoAction)  
+  id_exter_doc Int
+  external_document    ExternalDocument @relation(fields: [id_exter_doc], references: [id_external_doc], onDelete: NoAction, onUpdate: NoAction)  
+  enrollments   Enrollment[]
+}
+
+model ExternalDocument {
+  id_external_doc Int      @id @default(autoincrement())
+  tipe_document        String
+  url_file             String
+  status              String
+
+  deleted_at    Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  students  Student[]
+}
+
+model Degree{
+  id_degrees Int @id @default(autoincrement())
+  name       String @unique
+  level      String
+
+  deleted_at    Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  sections   Section[]
+}
+
+model Section{
+  id_sections Int @id @default(autoincrement())
+  name        String
+  shift       String
+
+  deleted_at    Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  id_degree  Int
+  degree     Degree @relation(fields: [id_degree], references: [id_degrees], onDelete: NoAction, onUpdate: NoAction)
+  enrollments Enrollment[]
+}
+
+
+enum statusEnrollment {
+  ACTIVE
+  RETIRED
+  TRANSFERRED
+  GRADUATED
+}
+
+enum type_admission {
+  NEW
+  TRANSFER
+  RETURNING
+}
+
+model Enrollment{
+  id_enrollments Int @id @default(autoincrement())
+  date_enrollment DateTime @default(now())
+  status_enrollments   statusEnrollment @default(ACTIVE)
+
+  deleted_at    Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  school_year    String
+  type_admission type_admission
+  id_student   Int
+  student      Student @relation(fields: [id_student], references: [id_students], onDelete: NoAction, onUpdate: NoAction)
+  id_section  Int
+  section     Section @relation(fields: [id_section], references: [id_sections], onDelete: NoAction, onUpdate: NoAction)
+  id_reprensentative Int
+  reprensentative LegalRepresentative @relation(fields: [id_reprensentative], references: [id_legal_representatives], onDelete: NoAction, onUpdate: NoAction)  
 }
