@@ -24,92 +24,84 @@ datasource db {
 // }
 
 model User {
-  id_users     Int      @id @default(autoincrement())
-  name         String
-  email        String   @unique
-  password     String
-  role         String
-
-  validate_email Boolean  @default(false)
-  deleted_at    Boolean  @default(false)
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-  
+  id_users            Int      @id @default(autoincrement())
+  name                String
+  email               String   @unique
+  password            String
+  role                String
+  validate_email      Boolean  @default(false)
+  deleted             Boolean  @default(false)
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
   Profile      Profile[]
 }
 
 model Profile {
   id_profiles       Int                @id @default(autoincrement())
-  DNI              String              @unique
-  name             String
-  lastname         String        
-  date_birthday    DateTime
-  national         String
-  phone            String
-  addres           String
-  sex              String
-  status           String
-
-  deleted_at    Boolean  @default(false)
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-
-  id_user        Int
-  user            User              @relation(fields: [id_user], references: [id_users], onDelete: NoAction, onUpdate: NoAction)
-  teacher       teacher[]
-  legal_representative LegalRepresentative[]
-  student       Student[]
+  DNI               String              @unique
+  name              String
+  last_name         String        
+  date_birthday     DateTime
+  national          String
+  phone             String
+  addres            String
+  sex               String
+  status            String
+  deleted           Boolean  @default(false)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  id_user           Int
+  user                    User              @relation(fields: [id_user], references: [id_users], onDelete: NoAction, onUpdate: NoAction)
+  teacher                 Teacher[]
+  legal_representative    Legal_representative[]
+  student                 Student[]
 }
 
 
-model teacher {
-  id_teachers Int      @id @default(autoincrement())
-  academic_degree String
-  salary         Float
-
-  deleted_at    Boolean  @default(false)
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-
-  id_profile  Int
+model Teacher {
+  id_teachers         Int      @id @default(autoincrement())
+  academic_degree     String
+  salary              Float
+  deleted             Boolean  @default(false)
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+  id_profile          Int
   profile     Profile @relation(fields: [id_profile], references: [id_profiles], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model LegalRepresentative {
-  id_legal_representatives  Int      @id @default(autoincrement())
-  family_relationship       String
-
-  deleted_at    Boolean  @default(false)
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-
+model Legal_representative {
+  id_legal_representatives    Int      @id @default(autoincrement())
+  family_relationship         String
+  deleted                     Boolean  @default(false)
+  created_at                  DateTime @default(now())
+  updated_at                  DateTime @updatedAt
   id_profile  Int
   profile     Profile @relation(fields: [id_profile], references: [id_profiles], onDelete: NoAction, onUpdate: NoAction)
-  enrollments Enrollment[]
+  enrollment Enrollment[]
 }
 
 model Student {
   id_students    Int      @id @default(autoincrement())
   emergency_contact String
 
-  deleted_at    Boolean  @default(false)
+  deleted    Boolean  @default(false)
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 
   id_profile     Int
   profile        Profile @relation(fields: [id_profile], references: [id_profiles], onDelete: NoAction, onUpdate: NoAction)  
   id_exter_doc Int
-  external_document    ExternalDocument @relation(fields: [id_exter_doc], references: [id_external_doc], onDelete: NoAction, onUpdate: NoAction)  
-  enrollments   Enrollment[]
+  external_document    External_document @relation(fields: [id_exter_doc], references: [id_external_doc], onDelete: NoAction, onUpdate: NoAction)  
+  enrollment   Enrollment[]
 }
 
-model ExternalDocument {
-  id_external_doc Int      @id @default(autoincrement())
+model External_document {
+  id_external_doc      Int      @id @default(autoincrement())
   tipe_document        String
   url_file             String
-  status              String
+  status               String
 
-  deleted_at    Boolean  @default(false)
+  deleted    Boolean  @default(false)
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 
@@ -121,7 +113,7 @@ model Degree{
   name       String @unique
   level      String
 
-  deleted_at    Boolean  @default(false)
+  deleted    Boolean  @default(false)
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 
@@ -133,7 +125,7 @@ model Section{
   name        String
   shift       String
 
-  deleted_at    Boolean  @default(false)
+  deleted    Boolean  @default(false)
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 
@@ -143,7 +135,7 @@ model Section{
 }
 
 
-enum statusEnrollment {
+enum status_enrollment {
   ACTIVE
   RETIRED
   TRANSFERRED
@@ -159,9 +151,9 @@ enum type_admission {
 model Enrollment{
   id_enrollments Int @id @default(autoincrement())
   date_enrollment DateTime @default(now())
-  status_enrollments   statusEnrollment @default(ACTIVE)
+  status_enrollments   status_enrollment @default(ACTIVE)
 
-  deleted_at    Boolean  @default(false)
+  deleted       Boolean  @default(false)
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 
@@ -172,5 +164,5 @@ model Enrollment{
   id_section  Int
   section     Section @relation(fields: [id_section], references: [id_sections], onDelete: NoAction, onUpdate: NoAction)
   id_reprensentative Int
-  reprensentative LegalRepresentative @relation(fields: [id_reprensentative], references: [id_legal_representatives], onDelete: NoAction, onUpdate: NoAction)  
+  reprensentative Legal_representative @relation(fields: [id_reprensentative], references: [id_legal_representatives], onDelete: NoAction, onUpdate: NoAction)  
 }

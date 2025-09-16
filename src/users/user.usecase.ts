@@ -13,13 +13,13 @@ interface UpdateUserInput extends Partial<CreateUserInput> {}
 
 export const getUsers = async (): Promise<User[]> => {
   return prisma.user.findMany({
-    where: { deleted_at: false },
+    where: { deleted: false },
   })
 }
 
 export const getUserById = async (id_users: number): Promise<User | null> => {
   return prisma.user.findFirst({
-    where: { id_users, deleted_at: false },
+    where: { id_users, deleted: false },
   })
 }
 
@@ -31,14 +31,14 @@ export const createUser = async (data: CreateUserInput): Promise<User> => {
       ...data,
       password: hashedPassword,
       validate_email: false,
-      deleted_at: false,
+      deleted: false,
     },
   })
 }
 
 export const updateUser = async (id_users: number, data: UpdateUserInput): Promise<User | null> => {
   const user = await prisma.user.findFirst({
-    where: { id_users, deleted_at: false },
+    where: { id_users, deleted: false },
   })
 
   if (!user) return null
@@ -51,13 +51,13 @@ export const updateUser = async (id_users: number, data: UpdateUserInput): Promi
 
 export const deleteUser = async (id_users: number): Promise<User | null> => {
   const user = await prisma.user.findFirst({
-    where: { id_users, deleted_at: false },
+    where: { id_users, deleted: false },
   })
 
   if (!user) return null
 
   return prisma.user.update({
     where: { id_users },
-    data: { deleted_at: true },
+    data: { deleted: true },
   })
 }

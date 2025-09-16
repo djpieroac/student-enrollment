@@ -16,12 +16,12 @@ const getProfileById = async (req: Request, res: Response): Promise<void> => {
 }
 
 const createdProfile = async (req: Request, res: Response): Promise<void> => {
-  const { DNI, name, lastname, date_birthday, national, phone, addres, sex, status, id_user } =
+  const { DNI, name, last_name, date_birthday, national, phone, addres, sex, status, id_user } =
     req.body
   const profile = await profileUseCase.createProfile({
     DNI,
     name,
-    lastname,
+    last_name,
     date_birthday,
     national,
     phone,
@@ -35,12 +35,12 @@ const createdProfile = async (req: Request, res: Response): Promise<void> => {
 
 const updateProfile = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params
-  const { DNI, name, lastname, date_birthday, national, phone, addres, sex, status, id_user } =
+  const { DNI, name, last_name, date_birthday, national, phone, addres, sex, status, id_user } =
     req.body
   const profile = await profileUseCase.updateProfile(Number(id), {
     DNI,
     name,
-    lastname,
+    last_name,
     date_birthday,
     national,
     phone,
