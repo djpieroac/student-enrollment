@@ -1,0 +1,33 @@
+@baseUrl = http://localhost:4001/api
+
+### Get All External Documents
+GET {{baseUrl}}/external-docs
+Content-Type: application/json
+
+### Get External Document by ID
+GET {{baseUrl}}/external-docs/1
+Content-Type: application/json
+
+### Create New External Document
+POST {{baseUrl}}/external-docs
+Content-Type: application/json
+
+{
+    "tipe_document": "Certificado de Notas",
+    "url_file": "C:/newpath/Certificado_de_Notas.pdf",
+    "status": "Revisando"
+}
+
+### Update External Document
+PUT {{baseUrl}}/external-docs/1
+Content-Type: application/json
+
+{
+    "tipe_document": "Certificado de Nacimiento",
+    "url_file": "C:/newpath/Certificado_de_Nacimiento.pdf",
+    "status": "Aprobado"
+}
+
+### Delete External Document
+DELETE {{baseUrl}}/external-docs/1
+Content-Type: application/json
