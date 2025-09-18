@@ -1,0 +1,33 @@
+@baseUrl = http://localhost:4001/api
+
+### Get All Students
+GET {{baseUrl}}/students
+Content-Type: application/json
+
+### Get Student by ID
+GET {{baseUrl}}/students/1
+Content-Type: application/json
+
+### Create New Student
+POST {{baseUrl}}/students
+Content-Type: application/json
+
+{
+    "emergency_contact": "123456789",
+    "id_profile": 2,
+    "id_exter_doc": 2
+}
+
+### Update Student
+PUT {{baseUrl}}/students/1
+Content-Type: application/json
+
+{
+    "emergency_contact": "0987654321",
+    "id_profile": 1,
+    "id_exter_doc": 1
+}
+
+### Delete Student
+DELETE {{baseUrl}}/students/1
+Content-Type: application/json

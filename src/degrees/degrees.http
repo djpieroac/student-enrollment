@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:4001/api
+
+### Get All Degrees
+GET {{baseUrl}}/degrees
+Content-Type: application/json
+
+### Get Degree by ID
+GET {{baseUrl}}/degrees/1
+Content-Type: application/json
+
+### Create New Degree
+POST {{baseUrl}}/degrees
+Content-Type: application/json
+
+{
+    "name": "1",
+    "level": "Primaria"
+}
+
+### Update Degree
+PUT {{baseUrl}}/degrees/1
+Content-Type: application/json
+
+{
+    "name": "1",
+    "level": "Secundaria"
+}
+
+### Delete Degree
+DELETE {{baseUrl}}/degrees/1
+Content-Type: application/json
+

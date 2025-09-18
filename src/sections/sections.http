@@ -1,0 +1,35 @@
+@baseUrl = http://localhost:4001/api
+
+### Get All Sections
+GET {{baseUrl}}/sections
+Content-Type: application/json
+
+### Get Section by ID
+GET {{baseUrl}}/sections/1
+Content-Type: application/json
+
+
+### Create New Section
+POST {{baseUrl}}/sections
+Content-Type: application/json
+
+{
+    "name": "A",
+    "shift": "Mañana",
+    "id_degree": 1
+}
+
+
+### Update Section
+PUT {{baseUrl}}/sections/1
+Content-Type: application/json
+
+{
+    "name": "A",
+    "shift": "Tarde",
+    "id_degrees": 1
+}
+
+### Delete Degree
+DELETE {{baseUrl}}/degrees/1
+Content-Type: application/json

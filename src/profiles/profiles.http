@@ -1,0 +1,66 @@
+### Variables globales
+@baseUrl = http://localhost:4001/api
+
+# # @name login
+# POST {{baseUrl}}/auth/login
+# Content-Type: application/json
+
+# {
+#     "email": "john.doe@example.com",
+#     "password": "securePassword123"
+# }
+
+### Crear nuevo perfil
+POST {{baseUrl}}/profiles
+Content-Type: application/json
+
+{
+    "DNI": "987654321",
+    "name": "John",
+    "last_name": "Doe",
+    "date_birthday": "1990-01-01T00:00:00Z",
+    "national": "Peru",
+    "phone": "987654321",
+    "addres": "Test Address 123",
+    "sex": "M",
+    "status": "ACTIVE",
+    "id_user": 1
+}
+
+### Obtener todos los perfiles
+GET {{baseUrl}}/profiles
+
+
+### Obtener perfil por ID
+GET {{baseUrl}}/profiles/1
+
+
+### Actualizar perfil
+PUT {{baseUrl}}/profiles/1
+Content-Type: application/json
+
+{
+    "name": "John Updated",
+    "phone": "999888777"
+}
+
+### Eliminar perfil (borrado lógico)
+DELETE {{baseUrl}}/profiles/1
+
+
+### Intentar crear perfil con DNI duplicado
+POST {{baseUrl}}/profiles
+Content-Type: application/json
+
+{
+    "DNI": "978645224",
+    "name": "Jane",
+    "last_name": "Smith",
+    "date_birthday": "1992-05-15T00:00:00Z",
+    "national": "Peru",
+    "phone": "123456789",
+    "addres": "Another Address 456",
+    "sex": "F",
+    "status": "ACTIVE",
+    "id_user": 2
+}

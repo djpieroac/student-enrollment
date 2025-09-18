@@ -17,9 +17,9 @@ export const getUsers = async (): Promise<User[]> => {
   })
 }
 
-export const getUserById = async (id: number): Promise<User | null> => {
+export const getUserById = async (id_users: number): Promise<User | null> => {
   return prisma.user.findFirst({
-    where: { id, deleted: false },
+    where: { id_users, deleted: false },
   })
 }
 
@@ -30,34 +30,34 @@ export const createUser = async (data: CreateUserInput): Promise<User> => {
     data: {
       ...data,
       password: hashedPassword,
-      validateEmail: false,
+      validate_email: false,
       deleted: false,
     },
   })
 }
 
-export const updateUser = async (id: number, data: UpdateUserInput): Promise<User | null> => {
+export const updateUser = async (id_users: number, data: UpdateUserInput): Promise<User | null> => {
   const user = await prisma.user.findFirst({
-    where: { id, deleted: false },
+    where: { id_users, deleted: false },
   })
 
   if (!user) return null
 
   return prisma.user.update({
-    where: { id },
+    where: { id_users },
     data,
   })
 }
 
-export const deleteUser = async (id: number): Promise<User | null> => {
+export const deleteUser = async (id_users: number): Promise<User | null> => {
   const user = await prisma.user.findFirst({
-    where: { id, deleted: false },
+    where: { id_users, deleted: false },
   })
 
   if (!user) return null
 
   return prisma.user.update({
-    where: { id },
+    where: { id_users },
     data: { deleted: true },
   })
 }
