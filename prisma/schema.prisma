@@ -44,7 +44,7 @@ model Profile {
   date_birthday        DateTime
   national             String
   phone                String
-  addres               String
+  address              String
   sex                  String
   status               String
   deleted              Boolean                @default(false)

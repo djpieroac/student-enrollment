@@ -8,6 +8,7 @@ import sectionRoutes from '../sections/section.routes'
 import stundetRoutes from '../student/student.routes'
 import teacherRoutes from '../teacher/teacher.routes'
 import userRoutes from '../users/user.routes'
+import enrollmentRoutes from '../enrollment/enrollment.routes'
 
 const router = express.Router()
 
@@ -20,5 +21,6 @@ router.use('/external-docs', externaldocRoutes)
 router.use('/students', stundetRoutes)
 router.use('/teachers', teacherRoutes)
 router.use('/legal-representative', legalRepresentativeRoutes)
+router.use('/enrollments', enrollmentRoutes)
 
 export default router
